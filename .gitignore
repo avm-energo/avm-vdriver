@@ -44,13 +44,7 @@ lib
 *msvc_make.bat
 /conan*
 /graph_info.json
-/src/comaversion/gversion.h
-/src/bin*
-/src/share*
-/src/lib*
-/src/include*
-/src/out/build
-/include
+/build
 *CMakeLists.txt.user*
 
 # Doxygen
