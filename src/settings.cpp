@@ -61,6 +61,7 @@ void Settings::readDevSettings(const QString &confFile)
         QString portname = "Port" + QString::number(i);
         port.use = (settings->value(portname, "No").toString() == "No") ? false : true;
         port.speed = settings->value(portname + "Speed", "115200").toUInt();
+        port.timeout = settings->value(portname + "Timeout", "5").toUInt();
         QString str = settings->value(portname + "Parity", "None").toString();
         if (str == "None")
             port.parity = Parity::NONE;
@@ -90,6 +91,10 @@ void Settings::writeSettings()
     Q_ASSERT(m_settings != nullptr);
     m_settings->setValue("Logs/loglevel", logLevel);
     m_settings->setValue("Main/serviceport", QString::number(servicePort));
-    m_settings->setValue("Main/devicecount", QString::number(m_deviceList.size()));
     m_settings->sync();
+}
+
+QList<Settings::DeviceStruct> Settings::deviceList()
+{
+    return m_deviceList;
 }

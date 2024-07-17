@@ -15,6 +15,7 @@ public:
         int speed;
         Parity parity;
         int stopbit;
+        int timeout;
     };
 
     struct DeviceStruct
@@ -24,7 +25,7 @@ public:
         QList<PortStruct> ports;
     };
 
-    Settings();
+    explicit Settings();
 
     void init(QString &logFileName);
     void readSettings();
@@ -32,13 +33,14 @@ public:
     void readDevSettings(const QString &confFile);
     void logSettings();
     void writeSettings(); // write module properties: serialnum, hwversion, etc
+    QList<DeviceStruct> deviceList();
 
     QString logLevel;
     QString logFilename;
     int servicePort; // ModbusTCP service port to configurate VDriver
     int devCount;
-    QList<DeviceStruct> m_deviceList;
 
 private:
+    QList<DeviceStruct> m_deviceList;
     QSettings *m_settings;
 };

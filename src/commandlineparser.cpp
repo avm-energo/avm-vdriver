@@ -3,8 +3,6 @@
 #include <QCommandLineParser>
 #include <QEventLoop>
 #include <QTimer>
-#include <gpiod.h>
-#include <iostream>
 
 CommandLineParser::CommandLineParser(QObject *parent) : QObject(parent)
 {
