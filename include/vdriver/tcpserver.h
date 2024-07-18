@@ -1,18 +1,18 @@
-#ifndef MODBUSTCPSERVER_H
-#define MODBUSTCPSERVER_H
+#pragma once
 
 #include <QByteArray>
 #include <QObject>
 #include <QTcpServer>
 #include <QTcpSocket>
 
-class ModbusTCPServer : public QObject
+class TCPServer : public QObject
 {
     Q_OBJECT
 public:
-    ModbusTCPServer(int port, QObject *parent = nullptr);
+    TCPServer(int port, QObject *parent = nullptr);
 
-    bool start();
+    bool start(QHostAddress address = QHostAddress::Any);
+    void setName(const QString &name);
 
 public slots:
     void writeData(const QByteArray &ba);
@@ -21,14 +21,12 @@ private:
     QTcpServer *m_server;
     QTcpSocket *m_clientConnection;
     int m_port;
+    QString m_name;
 
 signals:
     void newDataReady(QByteArray &ba);
-    void writeNewData(const QByteArray &ba);
 
 private slots:
     void clientTryingToConnect();
     void newDataReceived();
 };
-
-#endif // MODBUSTCPSERVER_H

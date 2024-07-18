@@ -10,7 +10,9 @@ Settings::Settings() {}
 void Settings::init(QString &logFileName)
 {
     m_settings = new QSettings(Defaults::settingsFileName, QSettings::NativeFormat);
-    logFilename = m_settings->value("Logs/logfile", Defaults::logFileName).toString();
+    logFileName = m_settings->value("Logs/logfile", Defaults::logFileName).toString();
+    QDir dir;
+    dir.mkpath(Defaults::logDirectory);
 }
 
 void Settings::readSettings()
@@ -25,6 +27,7 @@ void Settings::readSettings()
 void Settings::foreachConfFile()
 {
     QDir dir(Defaults::configDirectory);
+    dir.mkpath(Defaults::configDirectory);
 
     QStringList sl = dir.entryList(QStringList("*.conf"));
     foreach (QString str, sl) {
@@ -84,6 +87,7 @@ void Settings::logSettings()
     Logger::writeLog(Logger::All, "=========================");
     Logger::writeLog(Logger::All, "LogLevel: " + logLevel);
     Logger::writeLog(Logger::All, "Service Port: " + QString::number(servicePort));
+    Logger::writeLog(Logger::All, "=========================");
 }
 
 void Settings::writeSettings()

@@ -1,5 +1,4 @@
-#ifndef SERVICEPARSER_H
-#define SERVICEPARSER_H
+#pragma once
 
 #include <QObject>
 
@@ -15,5 +14,3 @@ signals:
 public slots:
     void newDataReceivedFromSocket(QByteArray &ba);
 };
-
-#endif // SERVICEPARSER_H

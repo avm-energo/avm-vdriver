@@ -1,9 +1,9 @@
 #pragma once
 
 #include <QObject>
-#include <include/vdriver/modbustcpserver.h>
 #include <include/vdriver/settings.h>
 #include <include/vdriver/tcpclient.h>
+#include <include/vdriver/tcpserver.h>
 
 class Engine : public QObject
 {
@@ -17,5 +17,5 @@ public:
 signals:
 
 private:
-    ModbusTCPServer *m_server;
+    TCPServer *m_server;
 };

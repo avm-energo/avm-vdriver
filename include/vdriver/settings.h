@@ -36,7 +36,6 @@ public:
     QList<DeviceStruct> deviceList();
 
     QString logLevel;
-    QString logFilename;
     int servicePort; // ModbusTCP service port to configurate VDriver
     int devCount;
 
