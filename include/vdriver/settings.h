@@ -42,4 +42,5 @@ public:
 private:
     QList<DeviceStruct> m_deviceList;
     QSettings *m_settings;
+    QString m_logDirectory, m_configDirectory;
 };

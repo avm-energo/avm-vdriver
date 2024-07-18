@@ -5,14 +5,26 @@
 #include <include/vdriver/defaults.h>
 #include <include/vdriver/settings.h>
 
-Settings::Settings() {}
+Settings::Settings()
+{
+#ifdef LOCALDEBUG
+    m_logDirectory = QDir::homePath() + "/.local/share/vdriver/";
+    m_configDirectory = QDir::homePath() + "/.config/vdriver/";
+#else
+    m_logDirectory = "/var/log/";
+    m_configDirectory = "/usr/local/etc/vdriver/";
+#endif
+    QDir dir;
+    dir.mkpath(m_logDirectory);
+    dir.mkpath(m_configDirectory + "conf.d");
+}
 
 void Settings::init(QString &logFileName)
 {
-    m_settings = new QSettings(Defaults::settingsFileName, QSettings::NativeFormat);
-    logFileName = m_settings->value("Logs/logfile", Defaults::logFileName).toString();
-    QDir dir;
-    dir.mkpath(Defaults::logDirectory);
+    m_settings = new QSettings(m_configDirectory + Defaults::settingsFileName,
+                               QSettings::NativeFormat);
+    logFileName = m_settings->value("Logs/logfile", m_logDirectory + Defaults::logFileName)
+                      .toString();
 }
 
 void Settings::readSettings()
@@ -26,8 +38,7 @@ void Settings::readSettings()
 
 void Settings::foreachConfFile()
 {
-    QDir dir(Defaults::configDirectory);
-    dir.mkpath(Defaults::configDirectory);
+    QDir dir(m_configDirectory + "conf.d");
 
     QStringList sl = dir.entryList(QStringList("*.conf"));
     foreach (QString str, sl) {
