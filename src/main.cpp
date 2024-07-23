@@ -11,7 +11,6 @@
 int main(int argc, char *argv[])
 {
     GitVersion gitVersion;
-    Settings settings;
     QString logFileName;
     CommandLineParser parser;
 
@@ -23,17 +22,16 @@ int main(int argc, char *argv[])
               << gitVersion.getGitCounter() << "-" << gitVersion.getGitHash().toStdString()
               << std::endl;
 
-    settings.init(logFileName);
-    settings.readSettings();
-    settings
-        .writeSettings(); // to set those settings which was not set (settings.ini is absent or is old enough)
-    Logger::setLogLevel(settings.logLevel);
+    Settings::init(logFileName);
+    Settings::readSettings();
+    Settings::writeSettings(); // to set those settings which was not set (settings.ini is absent or is old enough)
+    Logger::setLogLevel(Settings::loglevel());
     Logger::writeStart(logFileName);
     qInstallMessageHandler(Logger::messageHandler);
-    settings.logSettings();
+    Settings::logSettings();
 
     Engine *engine = new Engine;
-    engine->init(settings);
+    engine->init();
 
     return a.exec();
 }

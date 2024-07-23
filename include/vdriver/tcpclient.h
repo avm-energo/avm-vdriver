@@ -2,6 +2,7 @@
 
 #include <QObject>
 #include <QTcpSocket>
+#include <QTimer>
 
 class TCPClient : public QObject
 {
@@ -12,6 +13,7 @@ public:
 
     bool init(const QString &ip, int port);
     void setName(const QString &name);
+    void disconnectSocket();
 
     bool status;
 
@@ -24,9 +26,14 @@ signals:
 private slots:
     void errorOccured(QAbstractSocket::SocketError error);
     void newDataReceived();
+    void socketConnected();
+    void socketDisconnected();
+    void itsTimeToReconnect();
 
 private:
     QTcpSocket *m_socket;
-    QString m_name;
+    QString m_name, m_ip;
     QDataStream m_in;
+    int m_port;
+    QTimer *m_reconnectTimer;
 };

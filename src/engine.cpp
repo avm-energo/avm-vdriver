@@ -11,17 +11,17 @@ Engine::~Engine()
     delete m_server;
 }
 
-void Engine::init(Settings &settings)
+void Engine::init()
 {
     ServiceParser *parser = new ServiceParser;
     // создаём сервер
-    m_server = new TCPServer(settings.servicePort);
+    m_server = new TCPServer(Settings::servicePort());
     connect(m_server, &TCPServer::newDataReady, parser, &ServiceParser::newDataReceivedFromSocket);
     connect(parser, &ServiceParser::writeToSocket, m_server, &TCPServer::writeData);
     m_server->start();
 
     // создаём
-    foreach (auto deviceDescr, settings.deviceList()) {
+    foreach (auto deviceDescr, Settings::deviceList()) {
         Device *dev = new Device();
          if (!dev->init(deviceDescr)) {
             qCritical() << "Cannot initialize device " << deviceDescr.ip << ":"

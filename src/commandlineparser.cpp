@@ -8,7 +8,7 @@ CommandLineParser::CommandLineParser(QObject *parent) : QObject(parent)
 {
 }
 
-bool CommandLineParser::parseCommandLine(Settings &settings)
+bool CommandLineParser::parseCommandLine()
 {
     QCommandLineParser parser;
 

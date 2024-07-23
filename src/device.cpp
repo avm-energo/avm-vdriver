@@ -12,7 +12,7 @@ Device::~Device()
         delete server;
     }
     foreach (auto client, m_clientList) {
-        client->disconnect();
+        client->disconnectSocket();
         delete client;
     }
 }

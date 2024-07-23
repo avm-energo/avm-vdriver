@@ -5,7 +5,7 @@
 #include <include/vdriver/defaults.h>
 #include <include/vdriver/settings.h>
 
-Settings::Settings()
+void Settings::init(QString &logFileName)
 {
 #ifdef LOCALDEBUG
     m_logDirectory = QDir::homePath() + "/.local/share/vdriver/";
@@ -17,10 +17,6 @@ Settings::Settings()
     QDir dir;
     dir.mkpath(m_logDirectory);
     dir.mkpath(m_configDirectory + "conf.d");
-}
-
-void Settings::init(QString &logFileName)
-{
     m_settings = new QSettings(m_configDirectory + Defaults::settingsFileName,
                                QSettings::NativeFormat);
     logFileName = m_settings->value("Logs/logfile", m_logDirectory + Defaults::logFileName)
@@ -31,8 +27,9 @@ void Settings::readSettings()
 {
     int logcounter = m_settings->value("Test/counter", "1").toInt();
     m_settings->setValue("Test/counter", ++logcounter);
-    logLevel = m_settings->value("Logs/loglevel", "Info").toString();
-    servicePort = m_settings->value("Main/serviceport", "502").toInt();
+    m_logLevel = m_settings->value("Logs/loglevel", "Info").toString();
+    m_servicePort = m_settings->value("Main/serviceport", "502").toInt();
+    m_reconnectPeriodInSec = m_settings->value("Client/reconnectperiod", "15").toInt();
     foreachConfFile();
 }
 
@@ -40,7 +37,7 @@ void Settings::foreachConfFile()
 {
     QDir dir(m_configDirectory + "conf.d");
 
-    QStringList sl = dir.entryList(QStringList("*.conf"));
+    QStringList sl = dir.entryList(QStringList("*.conf"), QDir::NoFilter, QDir::SortFlag::Name);
     foreach (QString str, sl) {
         readDevSettings(dir.path() + "/" + str);
     }
@@ -96,20 +93,38 @@ void Settings::logSettings()
     Logger::writeLog(Logger::All, "Reading settings from: " + m_settings->fileName());
     Logger::writeLog(Logger::All, "Startup information:");
     Logger::writeLog(Logger::All, "=========================");
-    Logger::writeLog(Logger::All, "LogLevel: " + logLevel);
-    Logger::writeLog(Logger::All, "Service Port: " + QString::number(servicePort));
+    Logger::writeLog(Logger::All, "LogLevel: " + m_logLevel);
+    Logger::writeLog(Logger::All, "Service Port: " + QString::number(m_servicePort));
+    Logger::writeLog(Logger::All,
+                     "Client reconnect period: " + QString::number(m_reconnectPeriodInSec));
     Logger::writeLog(Logger::All, "=========================");
 }
 
 void Settings::writeSettings()
 {
     Q_ASSERT(m_settings != nullptr);
-    m_settings->setValue("Logs/loglevel", logLevel);
-    m_settings->setValue("Main/serviceport", QString::number(servicePort));
+    m_settings->setValue("Logs/loglevel", m_logLevel);
+    m_settings->setValue("Main/serviceport", QString::number(m_servicePort));
+    m_settings->setValue("Client/reconnectperiod", QString::number(m_reconnectPeriodInSec));
     m_settings->sync();
+}
+
+int Settings::reconnectPeriod()
+{
+    return m_reconnectPeriodInSec;
 }
 
 QList<Settings::DeviceStruct> Settings::deviceList()
 {
     return m_deviceList;
+}
+
+int Settings::servicePort()
+{
+    return m_servicePort;
+}
+
+QString Settings::loglevel()
+{
+    return m_logLevel;
 }

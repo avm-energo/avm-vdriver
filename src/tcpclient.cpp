@@ -1,3 +1,4 @@
+#include <include/vdriver/settings.h>
 #include <include/vdriver/tcpclient.h>
 
 TCPClient::TCPClient(QObject *parent)
@@ -15,10 +16,19 @@ TCPClient::~TCPClient()
 
 bool TCPClient::init(const QString &ip, int port)
 {
-    setName(ip + ":" + QString::number(port));
-    m_socket->connectToHost(ip, port);
+    m_reconnectTimer = new QTimer;
+    m_reconnectTimer->setSingleShot(true);
+    m_reconnectTimer->setInterval(Settings::reconnectPeriod()
+                                  * 1000); // reconnectPeriod is set in seconds
+    connect(m_reconnectTimer, &QTimer::timeout, this, &TCPClient::itsTimeToReconnect);
+    m_ip = ip;
+    m_port = port;
     connect(m_socket, &QAbstractSocket::readyRead, this, &TCPClient::newDataReceived);
     connect(m_socket, &QAbstractSocket::errorOccurred, this, &TCPClient::errorOccured);
+    connect(m_socket, &QAbstractSocket::connected, this, &TCPClient::socketConnected);
+    connect(m_socket, &QAbstractSocket::disconnected, this, &TCPClient::socketDisconnected);
+    setName(ip + ":" + QString::number(port));
+    m_socket->connectToHost(ip, port);
     return true;
 }
 
@@ -26,6 +36,8 @@ void TCPClient::setName(const QString &name)
 {
     m_name = "[RTU][" + name + "] ";
 }
+
+void TCPClient::disconnectSocket() {}
 
 void TCPClient::writeData(const QByteArray &ba)
 {
@@ -63,4 +75,20 @@ void TCPClient::newDataReceived()
     if (!m_in.commitTransaction())
         return;
     emit newDataReady(ba);
+}
+
+void TCPClient::socketConnected()
+{
+    status = true;
+}
+
+void TCPClient::socketDisconnected()
+{
+    status = false;
+    m_reconnectTimer->start();
+}
+
+void TCPClient::itsTimeToReconnect()
+{
+    m_socket->connectToHost(m_ip, m_port);
 }

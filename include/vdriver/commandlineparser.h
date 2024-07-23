@@ -10,7 +10,7 @@ class CommandLineParser : public QObject
 public:
     CommandLineParser(QObject *parent = nullptr);
 
-    bool parseCommandLine(Settings &settings);
+    bool parseCommandLine();
 
 private:
 

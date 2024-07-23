@@ -12,7 +12,7 @@ public:
     explicit Engine(QObject *parent = nullptr);
     ~Engine();
 
-    void init(Settings &settings);
+    void init();
 
 signals:
 
