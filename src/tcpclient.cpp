@@ -24,7 +24,10 @@ bool TCPClient::init(const QString &ip, int port)
     m_port = port;
     connect(m_socket, &QAbstractSocket::readyRead, this, &TCPClient::newDataReceived);
 #if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-    connect(m_socket, &QAbstractSocket::error, this, &TCPClient::errorOccured);
+    connect(m_socket,
+            QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::error),
+            this,
+            &TCPClient::errorOccured);
 #else
     connect(m_socket, &QAbstractSocket::errorOccurred, this, &TCPClient::errorOccured);
 #endif
