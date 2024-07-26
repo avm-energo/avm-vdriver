@@ -5,7 +5,6 @@ TCPClient::TCPClient(QObject *parent)
     : QObject{parent}
 {
     m_socket = new QTcpSocket(this);
-    m_in.setDevice(m_socket);
 }
 
 TCPClient::~TCPClient()
@@ -71,11 +70,7 @@ void TCPClient::newDataReceived()
         qCritical() << m_name << "Socket is null";
         return;
     }
-//    m_in.startTransaction();
     QByteArray ba = m_socket->readAll();
-//    m_in >> ba;
-//    if (!m_in.commitTransaction())
-//        return;
     emit newDataReady(ba);
 }
 

@@ -1,7 +1,6 @@
 #include <QCoreApplication>
 #include <QTcpSocket>
 #include <gen/logger.h>
-#include <gen/stdfunc.h>
 #include <gitversion/gitversion.h>
 #include <include/vdriver/commandlineparser.h>
 #include <include/vdriver/engine.h>

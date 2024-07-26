@@ -33,7 +33,6 @@ private slots:
 private:
     QTcpSocket *m_socket;
     QString m_name, m_ip;
-    QDataStream m_in;
     int m_port;
     QTimer *m_reconnectTimer;
 };

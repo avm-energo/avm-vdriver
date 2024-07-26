@@ -1,5 +1,4 @@
 #include <QtDebug>
-#include "qforeach.h"
 #include <gen/files.h>
 #include <gen/logger.h>
 #include <include/vdriver/defaults.h>
