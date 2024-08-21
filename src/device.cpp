@@ -1,5 +1,6 @@
 #include <include/vdriver/device.h>
 #include <include/vdriver/deviceparser.h>
+#include <include/vdriver/deviceserviceparser.h>
 
 Device::Device(QObject *parent)
     : QObject{parent}
