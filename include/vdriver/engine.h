@@ -5,17 +5,17 @@
 #include <include/vdriver/tcpclient.h>
 #include <include/vdriver/tcpserver.h>
 
-class Engine : public QObject
-{
-    Q_OBJECT
+class Engine : public QObject {
+  Q_OBJECT
 public:
-    explicit Engine(QObject *parent = nullptr);
-    ~Engine();
+  explicit Engine(QObject *parent = nullptr);
+  ~Engine();
 
-    void init();
+  void init();
 
 signals:
 
 private:
-    TCPServer *m_server;
+  TCPServer *m_server;
+  TCPClient *m_client;
 };
