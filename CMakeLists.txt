@@ -22,7 +22,8 @@ file(GLOB_RECURSE files_h   ${VDRIVER_INCLUDE_PATH}/*.h)
 file(GLOB_RECURSE files_cpp ${VDRIVER_SRC_PATH}/*.cpp)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
-find_package(QT NAMES Qt5)
+find_package(QT NAMES Qt6)
+message(STATUS "Qt version is: ${QT_VERSION_MAJOR}")
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Network)
 
 add_subdirectory(gitversion)
