@@ -4,7 +4,7 @@ DeviceServiceParser::DeviceServiceParser(TCPClient *client,
                                          Settings::DeviceStruct devSettings,
                                          QObject *parent)
     : m_client(client), m_deviceSettings(devSettings), QObject{parent} {
-  m_ConfTimer = new QTimer;
+  m_ConfTimer = new QTimer(this);
   m_ConfTimer->setInterval(1000);
   connect(m_ConfTimer, &QTimer::timeout, this,
           &DeviceServiceParser::ConfTimerTimeout);

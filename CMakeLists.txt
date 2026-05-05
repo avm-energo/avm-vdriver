@@ -35,7 +35,7 @@ add_executable(vdriver
     ${files_cpp}
     ${files_h}
 )
-target_link_libraries(vdriver Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Network gen gitversion)
+target_link_libraries(vdriver Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Network avm-gen gitversion)
 
 include(GNUInstallDirs)
 

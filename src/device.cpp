@@ -24,7 +24,7 @@ bool Device::init(Settings::DeviceStruct &device) {
   TCPClient *clientserv = new TCPClient;
   clientserv->setName(nameserv);
 
-  DeviceServiceParser *dparser = new DeviceServiceParser(clientserv, device);
+  DeviceServiceParser *dparser = new DeviceServiceParser(clientserv, device, this);
   connect(clientserv, &TCPClient::newDataReady, dparser,
           &DeviceServiceParser::newDataReceived);
   connect(dparser, &DeviceServiceParser::writeToService, clientserv,
@@ -40,7 +40,7 @@ bool Device::init(Settings::DeviceStruct &device) {
       server->setName(name);
       TCPClient *client = new TCPClient;
       client->setName(name);
-      DeviceParser *parser = new DeviceParser(client);
+      DeviceParser *parser = new DeviceParser(client, this);
       parser->setName(name);
       connect(server, &TCPServer::newDataReady, parser,
               &DeviceParser::newDataReceivedFromTCP);

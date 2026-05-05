@@ -4,6 +4,7 @@
 TCPServer::TCPServer(int port, QObject *parent)
     : m_port(port)
     , QObject(parent)
+    , m_clientConnection(nullptr)
 {
     m_server = new QTcpServer(this);
 }
@@ -27,6 +28,10 @@ void TCPServer::setName(const QString &name)
 
 void TCPServer::writeData(const QByteArray &ba)
 {
+    if (m_clientConnection == nullptr) {
+        qWarning() << m_name << "No client connected, dropping write";
+        return;
+    }
     qint64 writtenDataSize = m_clientConnection->write(ba);
     if (writtenDataSize != ba.size()) {
         qWarning() << m_name << "Write data size is not equal to data size actually written";
@@ -38,10 +43,11 @@ void TCPServer::clientTryingToConnect()
     m_clientConnection = m_server->nextPendingConnection();
     qDebug() << "TCP Client trying to connect: " << m_clientConnection->peerAddress().toString() <<
                 ":" << m_clientConnection->localPort();
-    connect(m_clientConnection,
-            &QAbstractSocket::disconnected,
-            m_clientConnection,
-            &QObject::deleteLater);
+    connect(m_clientConnection, &QAbstractSocket::disconnected,
+            m_clientConnection, &QObject::deleteLater);
+    connect(m_clientConnection, &QObject::destroyed, this, [this]() {
+        m_clientConnection = nullptr;
+    });
     connect(m_clientConnection, &QIODevice::readyRead, this, &TCPServer::newDataReceived);
 }
 

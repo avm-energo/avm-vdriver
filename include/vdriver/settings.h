@@ -39,6 +39,7 @@ QList<DeviceStruct> m_deviceList;
 QSettings *m_settings;
 QString m_logDirectory, m_configDirectory;
 QString m_logLevel;
+QString m_logFileName;
 int devCount;
 int m_servicePort; // ModbusTCP service port to configurate VDriver
 int m_reconnectPeriodInSec;

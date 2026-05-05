@@ -1,6 +1,6 @@
 #include <QtDebug>
-#include <gen/files.h>
-#include <gen/logger.h>
+#include <avm-gen/files.h>
+#include <avm-gen/logger.h>
 #include <include/vdriver/defaults.h>
 #include <include/vdriver/settings.h>
 
@@ -17,7 +17,7 @@ void Settings::init(QString &logFileName) {
   dir.mkpath(m_configDirectory + "conf.d");
   m_settings = new QSettings(m_configDirectory + Defaults::settingsFileName,
                              QSettings::NativeFormat);
-  logFileName =
+  logFileName = m_logFileName =
       m_settings->value("Logs/logfile", m_logDirectory + Defaults::logFileName)
           .toString();
 }
@@ -92,17 +92,16 @@ void Settings::readDevSettings(const QString &confFile) {
 
 void Settings::logSettings() {
   Q_ASSERT(m_settings != nullptr);
-
-  Logger::writeLog(Logger::All,
-                   "Reading settings from: " + m_settings->fileName());
-  Logger::writeLog(Logger::All, "Startup information:");
-  Logger::writeLog(Logger::All, "=========================");
-  Logger::writeLog(Logger::All, "LogLevel: " + m_logLevel);
-  Logger::writeLog(Logger::All,
-                   "Service Port: " + QString::number(m_servicePort));
-  Logger::writeLog(Logger::All, "Client reconnect period: " +
-                                    QString::number(m_reconnectPeriodInSec));
-  Logger::writeLog(Logger::All, "=========================");
+  Logger log;
+  log.writeStart(m_logFileName);
+  log.writeLog(log.All, "Reading settings from: " + m_settings->fileName());
+  log.writeLog(log.All, "Startup information:");
+  log.writeLog(log.All, "=========================");
+  log.writeLog(log.All, "LogLevel: " + m_logLevel);
+  log.writeLog(log.All, "Service Port: " + QString::number(m_servicePort));
+  log.writeLog(log.All, "Client reconnect period: " +
+                            QString::number(m_reconnectPeriodInSec));
+  log.writeLog(log.All, "=========================");
 }
 
 void Settings::writeSettings() {

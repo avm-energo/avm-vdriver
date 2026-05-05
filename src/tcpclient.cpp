@@ -3,6 +3,8 @@
 
 TCPClient::TCPClient(QObject *parent)
     : QObject{parent}
+    , status(false)
+    , isinitcom(false)
 {
     m_socket = new QTcpSocket(this);
 }
@@ -15,7 +17,7 @@ TCPClient::~TCPClient()
 
 bool TCPClient::init(const QString &ip, int port)
 {
-    m_reconnectTimer = new QTimer;
+    m_reconnectTimer = new QTimer(this);
     m_reconnectTimer->setSingleShot(true);
     m_reconnectTimer->setInterval(Settings::reconnectPeriod()
                                   * 1000); // reconnectPeriod is set in seconds

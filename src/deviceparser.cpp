@@ -3,7 +3,7 @@
 
 DeviceParser::DeviceParser(TCPClient *client, QObject *parent)
     : m_client(client), QObject{parent} {
-  m_RTUTimer = new QTimer;
+  m_RTUTimer = new QTimer(this);
   m_RTUTimer->setInterval(1000);
   connect(m_RTUTimer, &QTimer::timeout, this, &DeviceParser::RTUTimerTimeout);
 }
@@ -93,6 +93,7 @@ void DeviceParser::newDataReceivedFromRTU(QByteArray &ba) {
 }
 
 void DeviceParser::RTUTimerTimeout() {
+  m_RTUTimer->stop();
   QByteArray ba2;
   ba2 = bin;
   ba2.data()[7] = 0x80 + ba2.data()[7];
