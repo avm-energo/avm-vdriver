@@ -1,5 +1,11 @@
 vdriver (1.0.0) unstable; urgency=low
 
+  [#] some bugs removed with Claude
+
+ -- AVM-Energo <support@avmenergo.ru>  Tue, 05 May 2026 13:58:27 +0300
+
+vdriver (0.1.0) unstable; urgency=low
+
   * Initial release
 
  -- AVM-Energo <support@avmenergo.ru>  Fri, 08 Jul 2024 16:26:44 +0300

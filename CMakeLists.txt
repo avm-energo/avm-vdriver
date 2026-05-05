@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.18)
 
-project(vdriver LANGUAGES CXX VERSION 0.1.0)
+project(vdriver LANGUAGES CXX VERSION 1.0.0)
 
 option(LOCALDEBUG false)
 
