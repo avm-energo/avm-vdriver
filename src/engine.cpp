@@ -1,7 +1,7 @@
-#include <include/vdriver/device.h>
-#include <include/vdriver/deviceparser.h>
-#include <include/vdriver/engine.h>
-#include <include/vdriver/serviceparser.h>
+#include <include/device.h>
+#include <include/deviceparser.h>
+#include <include/engine.h>
+#include <include/serviceparser.h>
 
 Engine::Engine(QObject *parent) : QObject{parent} {}
 

@@ -1,4 +1,4 @@
-#include <include/vdriver/deviceserviceparser.h>
+#include <include/deviceserviceparser.h>
 
 DeviceServiceParser::DeviceServiceParser(TCPClient *client,
                                          Settings::DeviceStruct devSettings,

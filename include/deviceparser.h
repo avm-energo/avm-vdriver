@@ -2,7 +2,7 @@
 
 #include <QTimer>
 #include <QObject>
-#include <include/vdriver/tcpclient.h>
+#include <include/tcpclient.h>
 
 class DeviceParser : public QObject
 {

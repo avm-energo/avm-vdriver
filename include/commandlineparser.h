@@ -1,6 +1,6 @@
 #pragma once
 
-#include <include/vdriver/settings.h>
+#include <include/settings.h>
 
 #include <QObject>
 

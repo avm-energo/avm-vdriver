@@ -1,6 +1,6 @@
-#include <include/vdriver/device.h>
-#include <include/vdriver/deviceparser.h>
-#include <include/vdriver/deviceserviceparser.h>
+#include <include/device.h>
+#include <include/deviceparser.h>
+#include <include/deviceserviceparser.h>
 
 Device::Device(QObject *parent) : QObject{parent} {}
 
@@ -24,7 +24,8 @@ bool Device::init(Settings::DeviceStruct &device) {
   TCPClient *clientserv = new TCPClient;
   clientserv->setName(nameserv);
 
-  DeviceServiceParser *dparser = new DeviceServiceParser(clientserv, device, this);
+  DeviceServiceParser *dparser =
+      new DeviceServiceParser(clientserv, device, this);
   connect(clientserv, &TCPClient::newDataReady, dparser,
           &DeviceServiceParser::newDataReceived);
   connect(dparser, &DeviceServiceParser::writeToService, clientserv,

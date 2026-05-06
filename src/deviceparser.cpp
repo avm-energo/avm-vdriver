@@ -1,5 +1,5 @@
-#include <include/vdriver/ModCRC.h>
-#include <include/vdriver/deviceparser.h>
+#include <include/ModCRC.h>
+#include <include/deviceparser.h>
 
 DeviceParser::DeviceParser(TCPClient *client, QObject *parent)
     : m_client(client), QObject{parent} {

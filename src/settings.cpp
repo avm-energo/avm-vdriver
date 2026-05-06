@@ -1,8 +1,8 @@
 #include <QtDebug>
 #include <avm-gen/files.h>
 #include <avm-gen/logger.h>
-#include <include/vdriver/defaults.h>
-#include <include/vdriver/settings.h>
+#include <include/defaults.h>
+#include <include/settings.h>
 
 void Settings::init(QString &logFileName) {
 #ifdef LOCALDEBUG

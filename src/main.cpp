@@ -2,9 +2,9 @@
 #include <QTcpSocket>
 #include <avm-gen/messagehandler.h>
 #include <gitversion/gitversion.h>
-#include <include/vdriver/commandlineparser.h>
-#include <include/vdriver/engine.h>
-#include <include/vdriver/settings.h>
+#include <include/commandlineparser.h>
+#include <include/engine.h>
+#include <include/settings.h>
 #include <iostream>
 
 int main(int argc, char *argv[]) {

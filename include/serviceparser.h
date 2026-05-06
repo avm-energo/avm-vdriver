@@ -1,8 +1,8 @@
 #pragma once
 
 #include <QObject>
-#include <include/vdriver/deviceparser.h>
-#include <include/vdriver/settings.h>
+#include <include/deviceparser.h>
+#include <include/settings.h>
 
 class ServiceParser : public QObject {
   Q_OBJECT

@@ -1,9 +1,9 @@
 #pragma once
 
 #include <QObject>
-#include <include/vdriver/settings.h>
-#include <include/vdriver/tcpclient.h>
-#include <include/vdriver/tcpserver.h>
+#include <include/settings.h>
+#include <include/tcpclient.h>
+#include <include/tcpserver.h>
 
 class Engine : public QObject {
   Q_OBJECT

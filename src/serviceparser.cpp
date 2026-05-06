@@ -1,5 +1,5 @@
-#include <include/vdriver/serviceparser.h>
-#include <include/vdriver/settings.h>
+#include <include/serviceparser.h>
+#include <include/settings.h>
 
 ServiceParser::ServiceParser(QObject *parent) : QObject{parent} {}
 
