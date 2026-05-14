@@ -1,3 +1,3 @@
-rm /lib/systemd/system/vdriver.service 2>/dev/null
+rm /lib/systemd/system/avm-vdriver.service 2>/dev/null
 systemctl daemon-reload
 systemctl reset-failed

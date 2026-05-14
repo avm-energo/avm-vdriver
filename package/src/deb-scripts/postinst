@@ -1,6 +1,6 @@
-cp /usr/local/share/vdriver/vdriver.service /lib/systemd/system/vdriver.service
-chmod 644 /lib/systemd/system/vdriver.service
+cp /usr/local/share/avm-vdriver/avm-vdriver.service /lib/systemd/system/avm-vdriver.service
+chmod 644 /lib/systemd/system/avm-vdriver.service
 systemctl daemon-reload
-systemctl enable vdriver.service
-systemctl start vdriver.service
-systemctl status vdriver.service --no-pager || true
+systemctl enable avm-vdriver.service
+systemctl start avm-vdriver.service
+systemctl status avm-vdriver.service --no-pager || true

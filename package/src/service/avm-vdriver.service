@@ -4,7 +4,7 @@ StartLimitIntervalSec=0
 
 [Service]
 Type=simple
-ExecStart=/usr/local/bin/vdriver
+ExecStart=/usr/local/bin/avm-vdriver
 Restart=always
 RestartSec=5s
 
