@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
   Settings::readSettings();
   Settings::writeSettings(); // to set those settings which was not set
                              // (settings.ini is absent or is old enough)
-  MessageHandler::setMessageHandlerFilename(logFileName);
+  MessageHandler::setRawMessageHandlerFilename(logFileName);
   MessageHandler::setLogLevel(Logger::s_logLevelsMap[Settings::loglevel()]);
   qInstallMessageHandler(&MessageHandler::messageHandler);
 

@@ -93,7 +93,7 @@ void Settings::readDevSettings(const QString &confFile) {
 void Settings::logSettings() {
   Q_ASSERT(m_settings != nullptr);
   Logger log;
-  log.writeStart(m_logFileName);
+  log.writeRawStart(m_logFileName);
   log.writeLog(log.All, "Reading settings from: " + m_settings->fileName());
   log.writeLog(log.All, "Startup information:");
   log.writeLog(log.All, "=========================");
