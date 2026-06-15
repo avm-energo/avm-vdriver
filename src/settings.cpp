@@ -6,11 +6,11 @@
 
 void Settings::init(QString &logFileName) {
 #ifdef LOCALDEBUG
-  m_logDirectory = QDir::homePath() + "/.local/share/vdriver/";
-  m_configDirectory = QDir::homePath() + "/.config/vdriver/";
+  m_logDirectory = QDir::homePath() + "/.local/share/avm-vdriver/";
+  m_configDirectory = QDir::homePath() + "/.config/avm-vdriver/";
 #else
   m_logDirectory = "/var/log/";
-  m_configDirectory = "/usr/local/etc/vdriver/";
+  m_configDirectory = "/usr/local/etc/avm-vdriver/";
 #endif
   QDir dir;
   dir.mkpath(m_logDirectory);

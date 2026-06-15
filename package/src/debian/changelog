@@ -1,17 +1,23 @@
-vdriver (1.0.1) unstable; urgency=low
+avm-vdriver (1.0.2) unstable; urgency=low
+
+  [#] bugfix in package naming after name change
+
+ -- AVM-Energo <support@avmenergo.ru>  Mon, 15 Jun 2026 12:31:01 +0300
+
+avm-vdriver (1.0.1) unstable; urgency=low
 
   [#] bugfix in package creation
   [*] name change from vdriver to avm-vdriver
 
  -- AVM-Energo <support@avmenergo.ru>  Thu, 14 May 2026 15:59:50 +0300
 
-vdriver (1.0.0) unstable; urgency=low
+avm-vdriver (1.0.0) unstable; urgency=low
 
   [#] some bugs removed with Claude
 
  -- AVM-Energo <support@avmenergo.ru>  Tue, 05 May 2026 13:58:27 +0300
 
-vdriver (0.1.0) unstable; urgency=low
+avm-vdriver (0.1.0) unstable; urgency=low
 
   * Initial release
 

@@ -12,11 +12,11 @@ int main(int argc, char *argv[]) {
   QString logFileName;
   CommandLineParser parser;
 
-  QCoreApplication::setApplicationName("VDriver");
+  QCoreApplication::setApplicationName("AVM-VDriver");
   QCoreApplication::setOrganizationName("AVM-Energo");
   QCoreApplication a(argc, argv);
 
-  std::cout << "VDriver version: "
+  std::cout << "AVM-VDriver version: "
             << gitVersion.getConfigVersion().toStdString() << "-"
             << gitVersion.getGitCounter() << "-"
             << gitVersion.getGitHash().toStdString() << std::endl;
