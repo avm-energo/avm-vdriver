@@ -6,4 +6,4 @@ Section: embedded
 Package: avm-vdriver
 Description: Virtual Com driver for connection with i-7188-E5
 Architecture: amd64
-Depends: ${shlibs:Depends}
+Depends: ${shlibs:Depends}, libavm-gen (>= 2.0.1)
